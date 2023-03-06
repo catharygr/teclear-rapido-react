@@ -1,0 +1,40 @@
+body {
+  background-color: #222;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  background-color: black;
+  margin: 2rem auto;
+  color: greenyellow;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 90%;
+  height: 200px;
+  background-color: greenyellow;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-block-start: 1rem;
+  padding: 1rem;
+}
+
+button {
+  padding: 1rem;
+  font-family: inherit;
+  color: black;
+  font-size: 2rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: greenyellow;
+}
