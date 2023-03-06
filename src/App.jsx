@@ -5,8 +5,10 @@ function App() {
   const [wordCount, setWordCount] = React.useState(0);
   const [time, setTime] = React.useState(5);
   const [isTimeRunning, setIsTimeRunning] = React.useState(false);
-  const [isformDisabled, isSetFormDisabled] = React.useState(true);
-  const [isButtonDisabled, isSetButtonDisabled] = React.useState(false);
+  const [isformDisabled, setIsFormDisabled] = React.useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
+  const formRef = React.useRef(null);
+  const buttonRef = React.useRef(null);
 
   function wordCounter(formValue) {
     const num = formValue
@@ -18,8 +20,8 @@ function App() {
 
   function startGame() {
     setForm("");
-    isSetFormDisabled(false);
-    isSetButtonDisabled(true);
+    setIsFormDisabled(false);
+    setIsButtonDisabled(true);
     setTime(5);
     setWordCount(0);
     setIsTimeRunning(true);
@@ -27,8 +29,11 @@ function App() {
 
   function stopGame() {
     wordCounter(form);
-    isSetFormDisabled(true);
-    isSetButtonDisabled(false);
+    setIsFormDisabled(true);
+    setIsButtonDisabled(false);
+    setTimeout(() => {
+      buttonRef.current.focus();
+    }, 3000);
     setIsTimeRunning(false);
   }
 
@@ -38,6 +43,7 @@ function App() {
 
   React.useEffect(() => {
     if (time > 0 && isTimeRunning) {
+      formRef.current.focus();
       setTimeout(() => {
         setTime((oldTime) => oldTime - 1);
       }, 1000);
@@ -49,10 +55,20 @@ function App() {
   return (
     <div className="container">
       <h1>Qué tan rápido puedes teclear?</h1>
-      <textarea value={form} onChange={handleForm} disabled={isformDisabled} />
+      <textarea
+        value={form}
+        onChange={handleForm}
+        disabled={isformDisabled}
+        ref={formRef}
+      />
       <h3>Tiempo restante: {time}</h3>
-      <button disabled={isButtonDisabled} onClick={startGame}>
-        Comenzar
+      <button
+        autoFocus={true}
+        disabled={isButtonDisabled}
+        onClick={startGame}
+        ref={buttonRef}
+      >
+        {isTimeRunning ? "Escribe" : "Comenzar"}
       </button>
       <h2>Palabras contada: {wordCount}</h2>
     </div>

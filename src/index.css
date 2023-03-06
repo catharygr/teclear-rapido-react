@@ -27,14 +27,21 @@ textarea {
   padding: 1rem;
 }
 
+textarea:disabled {
+  background-color: #ccc;
+}
+
 button {
   padding: 1rem;
   font-family: inherit;
-  color: black;
   font-size: 2rem;
   font-weight: 700;
   border: none;
   cursor: pointer;
   border-radius: 10px;
   background-color: greenyellow;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
